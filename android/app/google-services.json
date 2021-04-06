@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "761093212172",
+    "project_id": "govigedara-a8419",
+    "storage_bucket": "govigedara-a8419.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761093212172:android:5547c1042bfc03b8984629",
+        "android_client_info": {
+          "package_name": "com.govigedara.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761093212172-av2ikp30e4uo0opg2k91anr9lh0f4ovt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwi78CWOEjpXkX-aeuY9j5OJNhaO9q9mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761093212172-av2ikp30e4uo0opg2k91anr9lh0f4ovt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761093212172:android:ba0d2b1609fef0ce984629",
+        "android_client_info": {
+          "package_name": "com.govigedarat.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761093212172-av2ikp30e4uo0opg2k91anr9lh0f4ovt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwi78CWOEjpXkX-aeuY9j5OJNhaO9q9mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761093212172-av2ikp30e4uo0opg2k91anr9lh0f4ovt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
