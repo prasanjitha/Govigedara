@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Orders/placeOrderPayment.dart';
+import 'package:e_shop/Store/cart.dart';
 import 'package:e_shop/Widgets/customAppBar.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
 import 'package:e_shop/Widgets/wideButton.dart';
@@ -23,7 +24,39 @@ class _AddressState extends State<Address> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: MyAppBar(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          flexibleSpace: Container(
+            decoration: new BoxDecoration(
+              gradient: new LinearGradient(
+                colors: [Colors.green[900], Colors.lightGreenAccent[700]],
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(1.0, 0.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp,
+              ),
+            ),
+          ),
+          centerTitle: true,
+          title: Text(
+            "govigedara",
+            style: TextStyle(
+                fontSize: 55.0, color: Colors.white, fontFamily: "Signatra"),
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: (){
+              Route route =MaterialPageRoute(builder: (c)=>CartPage());
+              Navigator.pushReplacement(context, route);
+            },
+
+          ),
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -78,7 +111,7 @@ class _AddressState extends State<Address> {
             Navigator.pushReplacement(context, route);
           },
           label: Text("Add New Address"),
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.green,
           icon: Icon(Icons.add_location),
         ),
       ),
@@ -87,7 +120,7 @@ class _AddressState extends State<Address> {
 
   noAddressCard() {
     return Card(
-      color: Colors.pink.withOpacity(0.5),
+      color: Colors.green.withOpacity(0.5),
       child: Container(
         height: 100.0,
         alignment: Alignment.center,
@@ -142,7 +175,7 @@ class _AddressCardState extends State<AddressCard> {
                 Radio(
                   groupValue: widget.currentIndex,
                   value: widget.value,
-                  activeColor: Colors.pink,
+                  activeColor: Colors.green,
                   onChanged: (val) {
                     Provider.of<AddressChanger>(context, listen: false)
                         .displayResult(val);
@@ -164,13 +197,13 @@ class _AddressCardState extends State<AddressCard> {
                           ]),
                           TableRow(children: [
                             KeyText(
-                              msg: "Phone Number",
+                              msg: "Mobile",
                             ),
                             Text(widget.model.phoneNumber),
                           ]),
                           TableRow(children: [
                             KeyText(
-                              msg: "Address",
+                              msg: "Street Address",
                             ),
                             Text(widget.model.flatNumber),
                           ]),
@@ -182,15 +215,9 @@ class _AddressCardState extends State<AddressCard> {
                           ]),
                           TableRow(children: [
                             KeyText(
-                              msg: "State",
+                              msg: "State/Province/Region",
                             ),
                             Text(widget.model.state),
-                          ]),
-                          TableRow(children: [
-                            KeyText(
-                              msg: "Pin Code",
-                            ),
-                            Text(widget.model.pincode),
                           ]),
                         ],
                       ),

@@ -10,7 +10,6 @@ import 'package:e_shop/Config/config.dart';
 import 'Counters/cartitemcounter.dart';
 import 'Counters/changeAddresss.dart';
 import 'Counters/totalMoney.dart';
-import 'Store/storehome.dart';
 import 'mainHomePage/mainHomePage.dart';
 
 Future<void> main() async
@@ -38,9 +37,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.green,
         ),
-        home://MainHomePage()
-
-        SplashScreen(),
+        home: SplashScreen(),
       ),);
   }
 }
@@ -65,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(Duration(seconds: 5), ()async{
       if(await EcommerceApp.auth.currentUser()!=null)
         {
-          Route route= MaterialPageRoute(builder: (_)=>StoreHome());
+          Route route= MaterialPageRoute(builder: (_)=>MainHomePage());
           Navigator.pushReplacement(context, route);
         }else
           {
@@ -81,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen>
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors:[Colors.pink,Colors.lightGreenAccent],
+            colors:[Colors.green[900],Colors.lightGreenAccent[700]],
             begin: const FractionalOffset(0.0,0.0),
             end: const FractionalOffset(1.0, 0.0),
             stops: [0.0,1.0],
@@ -92,9 +89,9 @@ class _SplashScreenState extends State<SplashScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("images/welcome.png"),
+              Image.asset("images/sc42.png"),
               SizedBox(height: 20.0,),
-              Text("world's Lagest & number online shop",
+              Text("Let's You eat Food better ...!",
                 style: TextStyle(
                     color: Colors.white
                 ),)

@@ -1,20 +1,18 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:e_shop/Store/storehome.dart';
-import 'package:e_shop/Widgets/customAppBar.dart';
+import 'package:e_shop/itemStore/itemStoreHome.dart';
+import 'package:e_shop/mainHomePage/urlLaunch/appDetails.dart';
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-import 'popularVegiAndFruits.dart';
 
 class buyerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green,
+
         body: Container(
           decoration: new BoxDecoration(
             gradient: new LinearGradient(
-              colors: [Colors.green, Colors.lightGreenAccent],
+              colors: [Colors.white, Colors.lightGreen[50]],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(1.0, 0.0),
               stops: [0.0, 1.0],
@@ -26,28 +24,28 @@ class buyerHome extends StatelessWidget {
               imageSlider,
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text("Category",style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
+                child: Text("Category",style: TextStyle(color: Colors.green,fontSize: 20,fontWeight: FontWeight.bold),),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   height: 150,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.green,
+                  color: Colors.white,
                   child: Category(),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text("Popular Vegi & Fruits",style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
+                child: Text("Articles",style: TextStyle(color: Colors.green,fontSize: 20,fontWeight: FontWeight.bold),),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: 2000,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.green,
-                  child: popularVegiAndFruits(),
+                  color: Colors.white,
+                  child: appInfromation(),
                 ),
               ),
             ],
@@ -56,11 +54,11 @@ class buyerHome extends StatelessWidget {
   }
 
  Widget imageSlider = Container(
-      color: Colors.green,
+      color: Colors.white,
       width: 140,
       height: 220,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Carousel(
           images: [
             AssetImage("assets/images/homeSlider/s1.jpg"),
@@ -97,7 +95,7 @@ class Category extends StatelessWidget {
             Navigator.pushReplacement(context, route);
           },
           child: Container(
-            height: 200,
+            height: 300,
             width: 200,
             child: Center(
                 child: Container(

@@ -7,9 +7,9 @@ import 'package:e_shop/Store/cart.dart';
 import 'package:e_shop/Orders/myOrders.dart';
 import 'package:e_shop/Store/storehome.dart';
 import 'package:e_shop/mainHomePage/mainHomePage.dart';
+import 'package:e_shop/q&a/questionAndAnswer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -18,16 +18,8 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
-            decoration: new BoxDecoration(
-              gradient: new LinearGradient(
-                colors: [Colors.pink, Colors.lightGreenAccent],
-                begin: const FractionalOffset(0.0, 0.0),
-                end: const FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp,
-              ),
-            ),
+            padding: EdgeInsets.only(top: 5.0, bottom: 2.0),
+           color: Colors.white,
             child: Column(
               children: [
                 Material(
@@ -45,13 +37,13 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 1.0,
                 ),
                 Text(
                   EcommerceApp.sharedPreferences
                       .getString(EcommerceApp.userName),
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 35.0,
                       fontFamily: "Signatra"),
                 )
@@ -63,29 +55,22 @@ class MyDrawer extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(top: 1.0),
-            decoration: new BoxDecoration(
-              gradient: new LinearGradient(
-                colors: [Colors.pink, Colors.lightGreenAccent],
-                begin: const FractionalOffset(0.0, 0.0),
-                end: const FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp,
-              ),
-            ),
+            color: Colors.white,
             child: Column(
               children: [
                 ListTile(
                   leading: Icon(
                     Icons.home,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "Home",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
+                  subtitle: Text("selling, buying, delivering"),
                   onTap: () {
                     Route route =
-                    MaterialPageRoute(builder: (c) =>MainHomePage());
+                        MaterialPageRoute(builder: (c) => MainHomePage());
                     Navigator.pushReplacement(context, route);
                   },
                 ),
@@ -94,18 +79,16 @@ class MyDrawer extends StatelessWidget {
                   color: Colors.white,
                   thickness: 6.0,
                 ),
-
-
-
                 ListTile(
                   leading: Icon(
                     Icons.reorder,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "My Orders",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
+                  subtitle: Text("conform, check"),
                   onTap: () {
                     Route route = MaterialPageRoute(builder: (c) => MyOrders());
                     Navigator.pushReplacement(context, route);
@@ -119,12 +102,13 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.shopping_cart,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "My Cart",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
+                  subtitle: Text("Add, view, check, remove items"),
                   onTap: () {
                     Route route = MaterialPageRoute(builder: (c) => CartPage());
                     Navigator.pushReplacement(context, route);
@@ -138,15 +122,37 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "Search",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
+                  subtitle: Text("vegitable, fruits, seeds"),
                   onTap: () {
                     Route route =
-                    MaterialPageRoute(builder: (c) => SearchProduct());
+                        MaterialPageRoute(builder: (c) => SearchProduct());
+                    Navigator.pushReplacement(context, route);
+                  },
+                ),
+                Divider(
+                  height: 10.0,
+                  color: Colors.white,
+                  thickness: 6.0,
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.search,
+                    color: Colors.green,
+                  ),
+                  title: Text(
+                    "Customer FeedBack",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  subtitle: Text("popular question, help"),
+                  onTap: () {
+                    Route route =
+                    MaterialPageRoute(builder: (c) => questionAndAnswer());
                     Navigator.pushReplacement(context, route);
                   },
                 ),
@@ -158,15 +164,16 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.add_location,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "Add New Address",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
+                  subtitle: Text("your location"),
                   onTap: () {
                     Route route =
-                    MaterialPageRoute(builder: (c) => AddAddress());
+                        MaterialPageRoute(builder: (c) => AddAddress());
                     Navigator.pushReplacement(context, route);
                   },
                 ),
@@ -178,16 +185,16 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(
                     Icons.exit_to_app,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   title: Text(
                     "Logout",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
                     EcommerceApp.auth.signOut().then((c) {
                       Route route =
-                      MaterialPageRoute(builder: (c) => AuthenticScreen());
+                          MaterialPageRoute(builder: (c) => AuthenticScreen());
                       Navigator.pushReplacement(context, route);
                     });
                   },

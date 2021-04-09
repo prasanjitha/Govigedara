@@ -1,4 +1,6 @@
 
+import 'package:e_shop/AddOrdersSystem/orderOperations/add_order.dart';
+import 'package:e_shop/AddOrdersSystem/orderOperations/home.dart';
 import 'package:e_shop/mainHomePage/MainPages/BitOrders/addOrders.dart';
 import 'package:e_shop/mainHomePage/MainPages/BitOrders/viewOrders.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,15 +15,7 @@ class chooseOption extends StatelessWidget {
 
 
       body: Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
-            colors: [Colors.green, Colors.amberAccent],
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
-        ),
+
         child: Center(
 
             child: Dialog(
@@ -51,28 +45,28 @@ class chooseOption extends StatelessWidget {
                         FlatButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>AddAddress()));
+                                builder: (context) =>AddNotePage()));
                           },
                           child: Text("Add Orders",style: TextStyle(
-                              fontSize: 20.0
-                          )),
-                        ),
-                        Divider(
-                          height: 20.0,
-                             color: Colors.pinkAccent,
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>Address()));
-                          },
-                          child: Text("View Orders",style: TextStyle(
-                              fontSize: 20.0
+                              fontSize: 20.0,color: Colors.green
                           )),
                         ),
                         Divider(
                           height: 10.0,
-                          color: Colors.pink,
+                             color: Colors.black,
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>HomePage()));
+                          },
+                          child: Text("View Orders",style: TextStyle(
+                              fontSize: 20.0,color: Colors.green
+                          )),
+                        ),
+                        Divider(
+                          height: 10.0,
+                          color: Colors.black,
                         ),
 
                         FlatButton(
@@ -81,12 +75,12 @@ class chooseOption extends StatelessWidget {
                                 builder: (context) =>MainHomePage()));
                           },
                           child: Text("Cancel",style: TextStyle(
-                              fontSize: 20.0
+                              fontSize: 20.0,color: Colors.green
                           )),
                         ),
                         Divider(
                           height: 1.0,
-                          color: Colors.pink,
+                          color: Colors.black,
                         ),
                       ],
                     ),

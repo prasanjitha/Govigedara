@@ -8,7 +8,7 @@ import 'package:e_shop/mainHomePage/MainPages/BitOrders/addOrders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
+// testing purpose
 class Address extends StatefulWidget {
   final double totalAmount;
   const Address({Key key, this.totalAmount}) : super(key: key);
@@ -28,7 +28,7 @@ class _AddressState extends State<Address> {
           flexibleSpace: Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
-                colors: [Colors.pink, Colors.lightGreenAccent],
+                colors: [Colors.green[900], Colors.lightGreenAccent[700]],
                 begin: const FractionalOffset(0.0, 0.0),
                 end: const FractionalOffset(1.0, 0.0),
                 stops: [0.0, 1.0],

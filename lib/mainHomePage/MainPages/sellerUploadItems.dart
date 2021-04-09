@@ -1,13 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_shop/Admin/adminShiftOrders.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
-import 'package:e_shop/main.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:image/image.dart' as ImD;
 
 
 class UploadPage extends StatefulWidget
@@ -28,7 +24,11 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   TextEditingController _shortInfoTextEdditingController = TextEditingController();
   String productId = DateTime.now().microsecondsSinceEpoch.toString();
   bool uploading =false;
-
+  //new
+  TextEditingController  _quentityTextEdditingController=TextEditingController();
+  TextEditingController  _nearestTownTextEdditingController=TextEditingController();
+  TextEditingController _addressTownTextEdditingController=TextEditingController();
+  TextEditingController _contactNoTextEdditingController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return file ==null ? displayAdminHomeScreen():displayAdminUploadFormScreen();
@@ -41,26 +41,17 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   }
   getAdminHomeScreenBody(){
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors:[Colors.pink,Colors.lightGreenAccent],
-            begin: const FractionalOffset(0.0,0.0),
-            end: const FractionalOffset(1.0, 0.0),
-            stops: [0.0,1.0],
-            tileMode: TileMode.clamp,
-
-          )
-      ),
+   color: Colors.white,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.shop_two,color: Colors.white,size: 200.0,),
+            Icon(Icons.shop_two,color: Colors.green,size: 200.0,),
             Padding(padding: EdgeInsets.only(top: 20.0),
               child: RaisedButton(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9.0)),
                 child: Text("Add New Items",style: TextStyle(fontSize: 20.0,color: Colors.white),),
-                color: Colors.grey,
+                color: Colors.green[200],
                 onPressed: ()=>takeImage(context),
               ),
             )
@@ -127,7 +118,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
         flexibleSpace: Container(
           decoration: new BoxDecoration(
             gradient: new LinearGradient(
-              colors: [Colors.pink, Colors.lightGreenAccent],
+              colors: [Colors.green[900], Colors.lightGreenAccent[700]],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(1.0, 0.0),
               stops: [0.0, 1.0],
@@ -135,27 +126,30 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
             ),
           ),
         ),
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: ClearFormInfo),
         title: Text(
           "New Product",
           style: TextStyle(
               color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
         ),
         actions: [
-          FlatButton(
-            child: Text(
-              "Add",
-              style: TextStyle(
-                  color: Colors.pink,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold),
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border:Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(50)
             ),
-            onPressed: uploading ? null : () => uploadImageAndSaveItemInfo(),
+            child: FlatButton(
+              child: Text(
+                "Add",
+                style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              onPressed: uploading ? null : () => uploadImageAndSaveItemInfo(),
+            ),
           )
         ],
       ),
@@ -180,7 +174,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
           ListTile(
             leading: Icon(
               Icons.perm_device_information,
-              color: Colors.pink,
+              color: Colors.green[900],
             ),
             title: Container(
               width: 250.0,
@@ -188,20 +182,21 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
                 style: TextStyle(color: Colors.deepPurpleAccent),
                 controller: _shortInfoTextEdditingController,
                 decoration: InputDecoration(
-                  hintText: "Short Info",
-                  hintStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  //change short info--->Item Name
+                  hintText: "Item Name",
+                  hintStyle: TextStyle(color: Colors.green),
                   border: InputBorder.none,
                 ),
               ),
             ),
           ),
           Divider(
-            color: Colors.pink,
+            color: Colors.green[700],
           ),
           ListTile(
             leading: Icon(
               Icons.perm_device_information,
-              color: Colors.pink,
+              color: Colors.green[900],
             ),
             title: Container(
               width: 250.0,
@@ -209,20 +204,20 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
                 style: TextStyle(color: Colors.deepPurpleAccent),
                 controller: _titleTextEdditingController,
                 decoration: InputDecoration(
-                  hintText: "Title",
-                  hintStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  hintText: "Category",
+                  hintStyle: TextStyle(color: Colors.green),
                   border: InputBorder.none,
                 ),
               ),
             ),
           ),
           Divider(
-            color: Colors.pink,
+            color: Colors.green[700],
           ),
           ListTile(
             leading: Icon(
               Icons.perm_device_information,
-              color: Colors.pink,
+              color: Colors.green[900],
             ),
             title: Container(
               width: 250.0,
@@ -231,19 +226,41 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
                 controller: _descriptionTextEdditingController,
                 decoration: InputDecoration(
                   hintText: "Description",
-                  hintStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  hintStyle: TextStyle(color: Colors.green),
                   border: InputBorder.none,
                 ),
               ),
             ),
           ),
           Divider(
-            color: Colors.pink,
+            color: Colors.green[700],
           ),
           ListTile(
             leading: Icon(
               Icons.perm_device_information,
-              color: Colors.pink,
+              color: Colors.green[900],
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                style: TextStyle(color: Colors.deepPurpleAccent),
+                controller: _quentityTextEdditingController,
+                decoration: InputDecoration(
+                  hintText: "Quentity(Kg)",
+                  hintStyle: TextStyle(color: Colors.green),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.green[700],
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.perm_device_information,
+              color: Colors.green[900],
             ),
             title: Container(
               width: 250.0,
@@ -252,15 +269,78 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
                 style: TextStyle(color: Colors.deepPurpleAccent),
                 controller: _priceTextEdditingController,
                 decoration: InputDecoration(
-                  hintText: "price",
-                  hintStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  hintText: "price(1 Kg)",
+                  hintStyle: TextStyle(color: Colors.green),
                   border: InputBorder.none,
                 ),
               ),
             ),
           ),
           Divider(
-            color: Colors.pink,
+            color: Colors.green[700],
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.perm_device_information,
+              color: Colors.green[900],
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style: TextStyle(color: Colors.deepPurpleAccent),
+                controller: _nearestTownTextEdditingController,
+                decoration: InputDecoration(
+                  hintText: "Nearest Town",
+                  hintStyle: TextStyle(color: Colors.green),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.green[700],
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.perm_device_information,
+              color: Colors.green[900],
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style: TextStyle(color: Colors.deepPurpleAccent),
+                controller: _addressTownTextEdditingController,
+                decoration: InputDecoration(
+                  hintText: "Address",
+                  hintStyle: TextStyle(color: Colors.green),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.green[700],
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.perm_device_information,
+              color: Colors.green[900],
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style: TextStyle(color: Colors.deepPurpleAccent),
+                controller: _contactNoTextEdditingController,
+                decoration: InputDecoration(
+                  hintText: "ContactNo",
+                  hintStyle: TextStyle(color: Colors.green),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.green[700],
           ),
         ],
       ),
@@ -273,6 +353,11 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
       _priceTextEdditingController.clear();
       _titleTextEdditingController.clear();
       _shortInfoTextEdditingController.clear();
+      _nearestTownTextEdditingController.clear();
+      _quentityTextEdditingController.clear();
+      _addressTownTextEdditingController.clear();
+      _contactNoTextEdditingController.clear();
+
     });
   }
   uploadImageAndSaveItemInfo() async {
@@ -304,6 +389,11 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
       "status": "available",
       "thumbnailUrl": downloadUrl,
       "title": _titleTextEdditingController.text.trim(),
+      "nearestTown":_nearestTownTextEdditingController.text.trim(),
+      "quentity":_quentityTextEdditingController.text.trim(),
+      "address":_addressTownTextEdditingController.text.trim(),
+      "contactNo":_contactNoTextEdditingController.text.trim(),
+
     });
     setState(() {
       file = null;
@@ -313,6 +403,10 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
       _titleTextEdditingController.clear();
       _shortInfoTextEdditingController.clear();
       _priceTextEdditingController.clear();
+      _quentityTextEdditingController.clear();
+      _nearestTownTextEdditingController.clear();
+      _addressTownTextEdditingController.clear();
+      _contactNoTextEdditingController.clear();
 
     });
   }

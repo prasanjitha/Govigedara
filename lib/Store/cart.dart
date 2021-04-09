@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Address/address.dart';
-import 'package:e_shop/Widgets/customAppBar.dart';
+import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
 import 'package:e_shop/Models/item.dart';
 import 'package:e_shop/Counters/cartitemcounter.dart';
 import 'package:e_shop/Counters/totalMoney.dart';
 import 'package:e_shop/Widgets/myDrawer.dart';
+import 'package:e_shop/mainHomePage/MainPages/TopProducts.dart';
+import 'package:e_shop/mainHomePage/mainHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:e_shop/Store/storehome.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
 
 class CartPage extends StatefulWidget {
+  final PreferredSizeWidget bottom;
+  CartPage({this.bottom});
   @override
   _CartPageState createState() => _CartPageState();
 }
@@ -40,11 +41,88 @@ class _CartPageState extends State<CartPage> {
         }
       },
         label: Text("Check Out"),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.green,
         icon: Icon(Icons.navigate_next),
       ),
-      appBar: MyAppBar(),
-      drawer: MyDrawer(),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        flexibleSpace: Container(
+          decoration: new BoxDecoration(
+            gradient: new LinearGradient(
+              colors: [Colors.green[900], Colors.lightGreenAccent[700]],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        title: Text(
+          "govigedara",
+          style: TextStyle(
+              fontSize: 55.0, color: Colors.white, fontFamily: "Signatra"),
+        ),
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.pink,
+                  ),
+                  onPressed: () {
+                    Route route = MaterialPageRoute(builder: (c) => CartPage());
+                    Navigator.pushReplacement(context, route);
+                  }),
+              Positioned(
+                child: Stack(
+                  children: [
+                    Icon(
+                      Icons.brightness_1,
+                      size: 20.0,
+                      color: Colors.green,
+                    ),
+                    Positioned(
+                        top: 3.0,
+                        bottom: 4.0,
+                        left: 4.0,
+                        child: Consumer<CartItemCounter>(
+                          builder: (context, counter, _) {
+                            return Text(
+                              (EcommerceApp.sharedPreferences
+                                  .getStringList(
+                                  EcommerceApp.userCartList)
+                                  .length -
+                                  1)
+                                  .toString(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500),
+                            );
+                          },
+                        )),
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: (){
+            Route route =MaterialPageRoute(builder: (c)=>MainHomePage());
+            Navigator.pushReplacement(context, route);
+          },
+
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -52,11 +130,11 @@ class _CartPageState extends State<CartPage> {
               return Padding(padding: EdgeInsets.all(8.0),
               child: Center(
                 child: cartProvider.count==0
-                    ?Container()
-                    :Text(
+                    ?Text(
                   "Total Price: Rs ${amountProvider.totalAmount.toString()}"
-                      ,style: TextStyle(color: Colors.black,fontSize: 20.0,fontWeight: FontWeight.w500),
+                  ,style: TextStyle(color: Colors.black,fontSize: 20.0,fontWeight: FontWeight.w500),
                 )
+                    :Container()
               ),
               );
             },),

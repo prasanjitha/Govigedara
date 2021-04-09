@@ -1,9 +1,11 @@
 import 'package:e_shop/Config/config.dart';
-import 'package:e_shop/Widgets/customAppBar.dart';
 import 'package:e_shop/Models/address.dart';
 import 'package:flutter/material.dart';
 
+import 'address.dart';
+
 class AddAddress extends StatelessWidget {
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final cName = TextEditingController();
@@ -17,7 +19,40 @@ class AddAddress extends StatelessWidget {
     return SafeArea(
       key: scaffoldKey,
         child: Scaffold(
-            appBar: MyAppBar(),
+            appBar: AppBar(
+              iconTheme: IconThemeData(
+                color: Colors.white,
+              ),
+              flexibleSpace: Container(
+                decoration: new BoxDecoration(
+                  gradient: new LinearGradient(
+                    colors: [Colors.green[900], Colors.lightGreenAccent[700]],
+                    begin: const FractionalOffset(0.0, 0.0),
+                    end: const FractionalOffset(1.0, 0.0),
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp,
+                  ),
+                ),
+              ),
+              centerTitle: true,
+              title: Text(
+                "govigedara",
+                style: TextStyle(
+                    fontSize: 55.0, color: Colors.white, fontFamily: "Signatra"),
+              ),
+              leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                  onPressed: (){
+                    Route route =MaterialPageRoute(builder: (c)=>Address());
+                    Navigator.pushReplacement(context, route);
+                  },
+
+            ),
+            ),
+
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
                 if(formKey.currentState.validate())
@@ -48,7 +83,7 @@ class AddAddress extends StatelessWidget {
                   }
               },
               label: Text("Done"),
-              backgroundColor: Colors.pink,
+              backgroundColor: Colors.green,
               icon: Icon(Icons.check),
             ),
             body: SingleChildScrollView(
@@ -59,7 +94,7 @@ class AddAddress extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Add New Orders",
+                      "Add New Address",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -67,6 +102,7 @@ class AddAddress extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 20.0,),
                 Form(
                     key: formKey,
                     child: Column(
@@ -75,26 +111,27 @@ class AddAddress extends StatelessWidget {
                           hint: "Name",
                           controller: cName,
                         ),
+                        Divider(height: 1.0,),
                         MyTextField(
-                          hint: "Phone Number",
+                          hint: "Mobile",
                           controller: cPhoneNumber,
                         ),
+                        Divider(height: 1.0,),
                         MyTextField(
-                          hint: "Address",
+                          hint: "Street Address",
                           controller: cFlatHomeNumber,
                         ),
+                        Divider(height: 1.0,),
                         MyTextField(
                           hint: "City",
                           controller: cCity,
                         ),
+                        Divider(height: 1.0,),
                         MyTextField(
-                          hint: "State ",
+                          hint: "State/Province/Region ",
                           controller: cState,
                         ),
-                        MyTextField(
-                          hint: "Pin Code",
-                          controller: cPinCode,
-                        ),
+                        Divider(height: 1.0,),
                       ],
                     )),
               ],

@@ -5,6 +5,7 @@ import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
 import 'package:e_shop/Widgets/orderCard.dart';
 import 'package:e_shop/Models/address.dart';
+import 'package:e_shop/mainHomePage/mainHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -107,7 +108,7 @@ class AdminStatusBanner extends StatelessWidget {
     return Container(
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
-          colors: [Colors.pink, Colors.lightGreenAccent],
+          colors: [Colors.green[900], Colors.lightGreenAccent[700]],
           begin: const FractionalOffset(0.0, 0.0),
           end: const FractionalOffset(1.0, 0.0),
           stops: [0.0, 1.0],
@@ -228,7 +229,7 @@ class AdminShippingDetails extends StatelessWidget {
               child: Container(
                 decoration: new BoxDecoration(
                   gradient: new LinearGradient(
-                    colors: [Colors.pink, Colors.lightGreenAccent],
+                    colors: [Colors.green[900], Colors.lightGreenAccent[700]],
                     begin: const FractionalOffset(0.0, 0.0),
                     end: const FractionalOffset(1.0, 0.0),
                     stops: [0.0, 1.0],
@@ -255,7 +256,7 @@ class AdminShippingDetails extends StatelessWidget {
         .document(mOrderId)
         .delete();
     getOrderId="";
-    Route route= MaterialPageRoute(builder: (c) => UploadPage());
+    Route route= MaterialPageRoute(builder: (c) => MainHomePage());
     Navigator.pushReplacement(context, route);
 
     Fluttertoast.showToast(msg: "Parcel Has Been received. Confirmed");

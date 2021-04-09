@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shop/Models/item.dart';
 import 'package:e_shop/Store/product_page.dart';
 import 'package:e_shop/Counters/cartitemcounter.dart';
+import 'package:e_shop/Widgets/customAppBar.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
+import 'package:e_shop/Widgets/myDrawer.dart';
 import 'package:e_shop/Widgets/searchBox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -23,7 +25,8 @@ class _StoreHomeState extends State<StoreHome> {
     width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-
+       appBar: MyAppBar(),
+        drawer: MyDrawer(),
         body: CustomScrollView(
           slivers: [
             SliverPersistentHeader(pinned:true,delegate: SearchBoxDelegate()),
@@ -140,7 +143,7 @@ Widget sourceInfo(ItemModel model, BuildContext context,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "50%",
+                                  "54%",
                                   style: TextStyle(
                                       fontSize: 15.0,
                                       color: Colors.white,

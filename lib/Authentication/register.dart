@@ -11,27 +11,27 @@ import 'package:image_picker/image_picker.dart';
 import '../Store/storehome.dart';
 import 'package:e_shop/Config/config.dart';
 
-
-
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
 
-
-
-class _RegisterState extends State<Register>
-{
-  final TextEditingController _nameTextEditingController=TextEditingController();
-  final TextEditingController _emailTextEditingController=TextEditingController();
-  final TextEditingController _passwordTextEditingController=TextEditingController();
-  final TextEditingController _cPasswordTextEditingController=TextEditingController();
-  final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
-  String userImageUrl="";
+class _RegisterState extends State<Register> {
+  final TextEditingController _nameTextEditingController =
+      TextEditingController();
+  final TextEditingController _emailTextEditingController =
+      TextEditingController();
+  final TextEditingController _passwordTextEditingController =
+      TextEditingController();
+  final TextEditingController _cPasswordTextEditingController =
+      TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String userImageUrl = "";
   File _imageFile;
   @override
   Widget build(BuildContext context) {
-    double _screenWidth=MediaQuery.of(context).size.width, _screenHeight=MediaQuery.of(context).size.height;
+    double _screenWidth = MediaQuery.of(context).size.width,
+        _screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Container(
         child: Column(
@@ -41,16 +41,19 @@ class _RegisterState extends State<Register>
               height: 10.0,
             ),
             InkWell(
-              onTap:_selectAndPickImage,
+              onTap: _selectAndPickImage,
               child: CircleAvatar(
                 radius: _screenWidth * 0.15,
-                  backgroundColor: Colors.white38,
-                backgroundImage: _imageFile==null ?null: FileImage(_imageFile),
-                child: _imageFile==null
-                  ?Icon(Icons.add_photo_alternate,size: _screenWidth*0.15,color: Colors.grey,)
-                    :null,
-
-
+                backgroundColor: Colors.white38,
+                backgroundImage:
+                    _imageFile == null ? null : FileImage(_imageFile),
+                child: _imageFile == null
+                    ? Icon(
+                        Icons.add_photo_alternate,
+                        size: _screenWidth * 0.15,
+                        color: Colors.limeAccent,
+                      )
+                    : null,
               ),
             ),
             SizedBox(
@@ -87,109 +90,132 @@ class _RegisterState extends State<Register>
                 ],
               ),
             ),
-            RaisedButton(onPressed: (){uploadAndSaveImage();},
-            color: Colors.pink,
-              child: Text("Sign up",style: TextStyle(color: Colors.white),),
-
+            RaisedButton(
+              onPressed: () {
+                uploadAndSaveImage();
+              },
+              color: Colors.white,
+              child: Text(
+                "Sign up",
+                style: TextStyle(color: Colors.green),
+              ),
             ),
             SizedBox(
               height: 30.0,
             ),
             Container(
               height: 4.0,
-              width: _screenWidth *0.8,
-              color: Colors.pink,
+              width: _screenWidth * 0.8,
+              color: Colors.lightGreenAccent,
             ),
             SizedBox(
               height: 15.0,
             ),
-
           ],
         ),
       ),
     );
   }
-  Future<void>_selectAndPickImage()async{
-    _imageFile=await ImagePicker.pickImage(source: ImageSource.gallery);
 
+  Future<void> _selectAndPickImage() async {
+    _imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
   }
-  Future<void>uploadAndSaveImage()async{
-    if(_imageFile==null)
-      {
-        showDialog(context: context, builder:(c)
-        {
-          return ErrorAlertDialog(message: "please select an image file",);
-        });
-      }else{
-      _passwordTextEditingController.text==_cPasswordTextEditingController.text
-          ?_emailTextEditingController.text.isNotEmpty&&
-    _passwordTextEditingController.text.isNotEmpty&&
-    _cPasswordTextEditingController.text.isNotEmpty&&
-    _nameTextEditingController.text.isNotEmpty
-          ?uploadToStorage()
-          :displayDialog("Please fill up the registration form..")
-          :displayDialog("Password do not match.");
+
+  Future<void> uploadAndSaveImage() async {
+    if (_imageFile == null) {
+      showDialog(
+          context: context,
+          builder: (c) {
+            return ErrorAlertDialog(
+              message: "please select an image file",
+            );
+          });
+    } else {
+      _passwordTextEditingController.text ==
+              _cPasswordTextEditingController.text
+          ? _emailTextEditingController.text.isNotEmpty &&
+                  _passwordTextEditingController.text.isNotEmpty &&
+                  _cPasswordTextEditingController.text.isNotEmpty &&
+                  _nameTextEditingController.text.isNotEmpty
+              ? uploadToStorage()
+              : displayDialog("Please fill up the registration form..")
+          : displayDialog("Password do not match.");
     }
+  }
 
+  displayDialog(String msg) {
+    showDialog(
+        context: context,
+        builder: (c) {
+          return ErrorAlertDialog(
+            message: msg,
+          );
+        });
   }
-  displayDialog(String msg){
-    showDialog(context: context, builder:(c){
-      return ErrorAlertDialog(message: msg,);
-    });
-  }
-  uploadToStorage() async{
-    showDialog(context: context, builder:(c){
-      return LoadingAlertDialog(message: "Registering, Please wait....",);
-    });
-    String imageFileName=DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference storageReference=FirebaseStorage.instance.ref().child(imageFileName);
-    StorageUploadTask storageUploadTask=storageReference.putFile(_imageFile);
-    StorageTaskSnapshot taskSnapshot=await storageUploadTask.onComplete;
-    await taskSnapshot.ref.getDownloadURL().then((urlImage){
-      userImageUrl=urlImage;
+
+  uploadToStorage() async {
+    showDialog(
+        context: context,
+        builder: (c) {
+          return LoadingAlertDialog(
+            message: "Registering, Please wait....",
+          );
+        });
+    String imageFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    StorageReference storageReference =
+        FirebaseStorage.instance.ref().child(imageFileName);
+    StorageUploadTask storageUploadTask = storageReference.putFile(_imageFile);
+    StorageTaskSnapshot taskSnapshot = await storageUploadTask.onComplete;
+    await taskSnapshot.ref.getDownloadURL().then((urlImage) {
+      userImageUrl = urlImage;
       _registerUser();
     });
   }
-  FirebaseAuth _auth =FirebaseAuth.instance;
-  void _registerUser() async
-  {
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  void _registerUser() async {
     FirebaseUser firebaseUser;
-    await _auth.createUserWithEmailAndPassword(
-        email:_emailTextEditingController.text.trim() ,
-        password:_passwordTextEditingController.text.trim()).then((auth){
-          firebaseUser=auth.user;
-    }).catchError((error){
+    await _auth
+        .createUserWithEmailAndPassword(
+            email: _emailTextEditingController.text.trim(),
+            password: _passwordTextEditingController.text.trim())
+        .then((auth) {
+      firebaseUser = auth.user;
+    }).catchError((error) {
       Navigator.pop(context);
-      showDialog(context: context,
-          builder: (c){
-        return ErrorAlertDialog(message: error.message.toString(),);
+      showDialog(
+          context: context,
+          builder: (c) {
+            return ErrorAlertDialog(
+              message: error.message.toString(),
+            );
           });
     });
-    if(firebaseUser!=null)
-      {
-        saveUserInfoToFireStore(firebaseUser).then((value){
-          Navigator.pop(context);
-          Route route=MaterialPageRoute(builder:(c)=>MainHomePage());
-          Navigator.pushReplacement(context,route);
-        });
-
-      }
-
+    if (firebaseUser != null) {
+      saveUserInfoToFireStore(firebaseUser).then((value) {
+        Navigator.pop(context);
+        Route route = MaterialPageRoute(builder: (c) => MainHomePage());
+        Navigator.pushReplacement(context, route);
+      });
+    }
   }
-  Future saveUserInfoToFireStore(FirebaseUser fUser)async
-  {
+
+  Future saveUserInfoToFireStore(FirebaseUser fUser) async {
     Firestore.instance.collection("users").document(fUser.uid).setData({
-      "uid":fUser.uid,
-      "email":fUser.email,
-      "name":_nameTextEditingController.text.trim(),
-      "url":userImageUrl,
-      "EcommerceApp.userCartList":["garbageValue"],
+      "uid": fUser.uid,
+      "email": fUser.email,
+      "name": _nameTextEditingController.text.trim(),
+      "url": userImageUrl,
+      "EcommerceApp.userCartList": ["garbageValue"],
     });
     await EcommerceApp.sharedPreferences.setString("uid", fUser.uid);
-    await EcommerceApp.sharedPreferences.setString(EcommerceApp.userEmail, fUser.email);
-    await EcommerceApp.sharedPreferences.setString(EcommerceApp.userName, _nameTextEditingController.text.trim());
-    await EcommerceApp.sharedPreferences.setString(EcommerceApp.userAvatarUrl, userImageUrl);
-    await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, ["garbageValue"]);
+    await EcommerceApp.sharedPreferences
+        .setString(EcommerceApp.userEmail, fUser.email);
+    await EcommerceApp.sharedPreferences.setString(
+        EcommerceApp.userName, _nameTextEditingController.text.trim());
+    await EcommerceApp.sharedPreferences
+        .setString(EcommerceApp.userAvatarUrl, userImageUrl);
+    await EcommerceApp.sharedPreferences
+        .setStringList(EcommerceApp.userCartList, ["garbageValue"]);
   }
 }
-

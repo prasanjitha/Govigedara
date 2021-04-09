@@ -8,6 +8,10 @@ class ItemModel {
   String longDescription;
   String status;
   int price;
+  String quentity;
+  String nearestTown;
+  String address;
+  String contactNo;
 
   ItemModel(
       {this.title,
@@ -16,6 +20,11 @@ class ItemModel {
         this.thumbnailUrl,
         this.longDescription,
         this.status,
+        this.price,
+        this.nearestTown,
+        this.quentity,
+        this.address,
+        this.contactNo,
         });
 
   ItemModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +35,10 @@ class ItemModel {
     longDescription = json['longDescription'];
     status = json['status'];
     price = json['price'];
+    nearestTown=json['nearestTown'];
+    quentity=json['quentity'];
+    address=json['address'];
+    contactNo=json['contactNo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -33,6 +46,10 @@ class ItemModel {
     data['title'] = this.title;
     data['shortInfo'] = this.shortInfo;
     data['price'] = this.price;
+    data['quentity']=this.quentity;
+    data['nearestTown']=this.nearestTown;
+    data['address']=this.address;
+    data['contactNo']=this.contactNo;
     if (this.publishedDate != null) {
       data['publishedDate'] = this.publishedDate;
     }

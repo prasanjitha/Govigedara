@@ -4,7 +4,6 @@ import 'package:e_shop/Counters/cartitemcounter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final PreferredSizeWidget bottom;
   MyAppBar({this.bottom});
@@ -18,7 +17,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       flexibleSpace: Container(
         decoration: new BoxDecoration(
           gradient: new LinearGradient(
-            colors: [Colors.pink, Colors.lightGreenAccent],
+            colors: [Colors.green[900], Colors.lightGreenAccent[700]],
             begin: const FractionalOffset(0.0, 0.0),
             end: const FractionalOffset(1.0, 0.0),
             stops: [0.0, 1.0],
@@ -60,8 +59,12 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                       child: Consumer<CartItemCounter>(
                         builder: (context, counter, _) {
                           return Text(
-                            (EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList).length-1).toString(),
-
+                            (EcommerceApp.sharedPreferences
+                                        .getStringList(
+                                            EcommerceApp.userCartList)
+                                        .length -
+                                    1)
+                                .toString(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.0,

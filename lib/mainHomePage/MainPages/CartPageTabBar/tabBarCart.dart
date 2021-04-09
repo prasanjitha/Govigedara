@@ -1,16 +1,15 @@
-/*
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Address/address.dart';
+import 'package:e_shop/Config/config.dart';
 import 'package:e_shop/Widgets/customAppBar.dart';
 import 'package:e_shop/Widgets/loadingWidget.dart';
 import 'package:e_shop/Models/item.dart';
 import 'package:e_shop/Counters/cartitemcounter.dart';
 import 'package:e_shop/Counters/totalMoney.dart';
 import 'package:e_shop/Widgets/myDrawer.dart';
+import 'package:e_shop/mainHomePage/MainPages/TopProducts.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:e_shop/Store/storehome.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -39,7 +38,7 @@ class _CartPageState extends State<CartPage> {
           Navigator.pushReplacement(context, route);
         }
       },
-        label: Text("Checks Out"),
+        label: Text("Check Out"),
         backgroundColor: Colors.green,
         icon: Icon(Icons.navigate_next),
       ),
@@ -50,7 +49,10 @@ class _CartPageState extends State<CartPage> {
               return Padding(padding: EdgeInsets.all(8.0),
                 child: Center(
                     child: cartProvider.count==0
-                        ?Container()
+                        ?Text(
+                      "Total Price: Rs ${amountProvider.totalAmount.toString()}"
+                      ,style: TextStyle(color: Colors.black,fontSize: 20.0,fontWeight: FontWeight.w500),
+                    )
                         :Text(
                       "Total Price: Rs ${amountProvider.totalAmount.toString()}"
                       ,style: TextStyle(color: Colors.black,fontSize: 20.0,fontWeight: FontWeight.w500),
@@ -134,4 +136,3 @@ class _CartPageState extends State<CartPage> {
 
   }
 }
-*/

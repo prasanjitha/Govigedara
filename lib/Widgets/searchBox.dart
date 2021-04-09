@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../Store/Search.dart';
 
-
 class SearchBoxDelegate extends SliverPersistentHeaderDelegate {
-
-
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) =>
+          BuildContext context, double shrinkOffset, bool overlapsContent) =>
       InkWell(
         onTap: () {
           Route route = MaterialPageRoute(builder: (c) => SearchProduct());
@@ -18,7 +15,7 @@ class SearchBoxDelegate extends SliverPersistentHeaderDelegate {
         child: Container(
           decoration: new BoxDecoration(
             gradient: new LinearGradient(
-              colors: [Colors.pink, Colors.lightGreenAccent],
+              colors: [Colors.green[900], Colors.lightGreenAccent[700]],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(1.0, 0.0),
               stops: [0.0, 1.0],
@@ -65,9 +62,4 @@ class SearchBoxDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
-
-
 }
-
-
-

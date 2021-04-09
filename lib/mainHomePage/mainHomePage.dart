@@ -1,11 +1,11 @@
 import 'package:e_shop/Admin/adminShiftOrders.dart';
 import 'package:e_shop/Orders/myOrders.dart';
 import 'package:e_shop/Widgets/myDrawer.dart';
+import 'package:e_shop/mainHomePage/MainPages/CartPageTabBar/tabBarCart.dart';
+import 'package:e_shop/mainHomePage/MainPages/TopProducts.dart';
 import 'package:flutter/material.dart';
 import 'MainPages/AlertDialogBox/ChooseOption.dart';
-import 'MainPages/TopProducts.dart';
 import 'MainPages/buyerHome.dart';
-import 'MainPages/myCart.dart';
 import 'MainPages/sellerUploadItems.dart';
 
 class MainHomePage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MainHomePageState extends State<MainHomePage>
               flexibleSpace: Container(
                 decoration: new BoxDecoration(
                   gradient: new LinearGradient(
-                    colors: [Colors.pink, Colors.lightGreenAccent],
+                    colors: [Colors.green[900], Colors.lightGreenAccent[700]],
                     begin: const FractionalOffset(0.0, 0.0),
                     end: const FractionalOffset(1.0, 0.0),
                     stops: [0.0, 1.0],
@@ -72,7 +72,7 @@ class _MainHomePageState extends State<MainHomePage>
                   Tab(text: '‍My Orders', icon: Icon(Icons.store)),
                   Tab(text: 'My Cart', icon: Icon(Icons.shopping_cart)),
                   Tab(text: 'Add Orders', icon: Icon(Icons.bookmark_border)),
-                  Tab(text: 'Top Products', icon: Icon(Icons.star_border)),
+                  Tab(text: 'Newly Products', icon: Icon(Icons.star_border)),
                   Tab(text: 'My Account', icon: Icon(Icons.account_circle)),
                 ],
                 controller: _tabController,
@@ -83,7 +83,7 @@ class _MainHomePageState extends State<MainHomePage>
         body: Container(
           decoration: new BoxDecoration(
             gradient: new LinearGradient(
-              colors: [Colors.green, Colors.lightGreenAccent],
+              colors: [Colors.white, Colors.lightGreen[100]],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(1.0, 0.0),
               stops: [0.0, 1.0],

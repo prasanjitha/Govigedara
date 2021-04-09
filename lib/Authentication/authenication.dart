@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'register.dart';
-import 'package:e_shop/Config/config.dart';
 
 
 class AuthenticScreen extends StatefulWidget {
@@ -10,7 +9,6 @@ class AuthenticScreen extends StatefulWidget {
 }
 
 class _AuthenticScreenState extends State<AuthenticScreen> {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -19,35 +17,36 @@ class _AuthenticScreenState extends State<AuthenticScreen> {
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors:[Colors.pink,Colors.lightGreenAccent],
-                begin: const FractionalOffset(0.0,0.0),
-                end: const FractionalOffset(1.0, 0.0),
-                stops: [0.0,1.0],
-                tileMode: TileMode.clamp,
-
-              )
-            ),
+                gradient: LinearGradient(
+              colors: [Colors.green[800], Colors.lightGreenAccent[700]],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
+            )),
           ),
-          title: Text("Govigedara",
-          style: TextStyle(
-            fontSize: 55.0,
-            color: Colors.white,
-            fontFamily: "Signatra"
-          ),
+          title: Text(
+            "Govigedara",
+            style: TextStyle(
+                fontSize: 55.0, color: Colors.white, fontFamily: "Signatra"),
           ),
           centerTitle: true,
           bottom: TabBar(
             tabs: [
               Tab(
-                icon: Icon(Icons.lock,color: Colors.white,),
+                icon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
                 text: "Login",
               ),
               Tab(
-                icon: Icon(Icons.lock,color: Colors.white,),
+                icon: Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                ),
                 text: "Register",
               ),
-
             ],
             indicatorColor: Colors.white38,
             indicatorWeight: 5.0,
@@ -55,13 +54,11 @@ class _AuthenticScreenState extends State<AuthenticScreen> {
         ),
         body: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors:[Colors.pink,Colors.lightGreenAccent],
-                begin: Alignment.topRight,
-                end:Alignment.bottomLeft,
-
-              ),
-
+            gradient: LinearGradient(
+              colors: [Colors.green[900], Colors.lightGreenAccent],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
           ),
           child: TabBarView(
             children: [
@@ -69,9 +66,7 @@ class _AuthenticScreenState extends State<AuthenticScreen> {
               Register(),
             ],
           ),
-
         ),
-
       ),
     );
   }
